@@ -1,28 +1,17 @@
-package es.proyecto.apiproyecto.repository.modelo;
+package es.proyecto.apiproyecto.rest.dto;
 
-
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name="invitacion")
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Invitation {
+public class InvitationDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user = null;
+    private UserDTO user = null;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
-    private Event event = null;
+    private EventDTO event = null;
 
     private float invoiceAmount;
     private float discounet;
@@ -30,11 +19,10 @@ public class Invitation {
     private boolean accept;
 
 
-    public Invitation() {
+    public InvitationDTO() {
     }
 
-    @JsonCreator
-    public Invitation(@JsonProperty("id") Integer id,@JsonProperty("user") User user,@JsonProperty("event") Event event, @JsonProperty("invoiceAmunt") float invoiceAmount, @JsonProperty("discounet") float discounet, @JsonProperty("totalAmount") float totalAmount, @JsonProperty("accept") boolean accept) {
+    public InvitationDTO(Integer id, UserDTO user, EventDTO event, float invoiceAmount, float discounet, float totalAmount, boolean accept) {
         this.id = id;
         this.user = user;
         this.event = event;
@@ -52,19 +40,19 @@ public class Invitation {
         this.id = id;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
-    public Event getEvent() {
+    public EventDTO getEvent() {
         return event;
     }
 
-    public void setEvent(Event event) {
+    public void setEvent(EventDTO event) {
         this.event = event;
     }
 

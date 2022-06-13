@@ -1,31 +1,23 @@
-package es.proyecto.apiproyecto.repository.modelo;
-
+package es.proyecto.apiproyecto.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.persistence.*;
 import java.sql.Date;
 
-@Entity
-@Table(name="event_status")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EventStatus {
+public class EventStatusDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_id")
-    private Event event;
-
+    private EventDTO event;
     private Date timeAssigned;
     private boolean end;
 
-    public EventStatus() {
+
+    public EventStatusDTO() {
     }
 
-    public EventStatus(Integer id, Event event, Date timeAssigned, boolean end) {
+    public EventStatusDTO(Integer id, EventDTO event, Date timeAssigned, boolean end) {
         this.id = id;
         this.event = event;
         this.timeAssigned = timeAssigned;
@@ -40,11 +32,11 @@ public class EventStatus {
         this.id = id;
     }
 
-    public Event getEvent() {
+    public EventDTO getEvent() {
         return event;
     }
 
-    public void setEvent(Event event) {
+    public void setEvent(EventDTO event) {
         this.event = event;
     }
 

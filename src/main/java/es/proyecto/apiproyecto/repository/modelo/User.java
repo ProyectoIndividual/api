@@ -1,7 +1,9 @@
 package es.proyecto.apiproyecto.repository.modelo;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -13,12 +15,9 @@ import java.util.List;
 @Table(name="user")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-
     private String name;
     private String surnames;
     private String description;
@@ -29,25 +28,25 @@ public class User {
     @Column(name="image")
     @Type(type="org.hibernate.type.BinaryType")
     private byte[] image;
-
     private String password;
     private Date registrationDate;
     private String token;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "localitation_id")
     private Localitation localitation;
-
+/*
     @OneToMany(mappedBy = "user")
     private List<Event> events = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<Invitation> invitations= new ArrayList<>();
+    private List<Invitation> invitations= new ArrayList<>();*/
+
 
     public User() {
     }
-
-    public User(Integer id, String name, String surnames, String description, String email, String phone, byte[] image, String password, Date registrationDate, String token, Localitation localitation, List<Event> events, List<Invitation> invitations) {
+    @JsonCreator
+    public User(@JsonProperty("id") Integer id, @JsonProperty("name") String name, @JsonProperty("surnames") String surnames, @JsonProperty("description") String description, @JsonProperty("email") String email, @JsonProperty("phone") String phone,@JsonProperty("image") byte[] image,@JsonProperty("password") String password, @JsonProperty("registrationDate") Date registrationDate, @JsonProperty("token") String token, @JsonProperty("localitation") Localitation localitation) {
         this.id = id;
         this.name = name;
         this.surnames = surnames;
@@ -59,8 +58,8 @@ public class User {
         this.registrationDate = registrationDate;
         this.token = token;
         this.localitation = localitation;
-        this.events = events;
-        this.invitations = invitations;
+      //  this.events = events;
+       // this.invitations = invitations;
     }
 
     public Integer getId() {
@@ -150,7 +149,7 @@ public class User {
     public void setLocalitation(Localitation localitation) {
         this.localitation = localitation;
     }
-
+/*
     public List<Event> getEvents() {
         return events;
     }
@@ -165,5 +164,5 @@ public class User {
 
     public void setInvitations(List<Invitation> invitations) {
         this.invitations = invitations;
-    }
+    }*/
 }

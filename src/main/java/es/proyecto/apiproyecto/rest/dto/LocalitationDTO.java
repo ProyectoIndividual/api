@@ -1,19 +1,10 @@
-package es.proyecto.apiproyecto.repository.modelo;
+package es.proyecto.apiproyecto.rest.dto;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
-
-
-@Entity
-@Table(name="localitation")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Localitation {
+public class LocalitationDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String postalCode;
@@ -22,10 +13,10 @@ public class Localitation {
     private String street;
 
 
-    public Localitation() {
+    public LocalitationDTO() {
     }
-    @JsonCreator
-    public Localitation(@JsonProperty("id") Integer id, @JsonProperty("postalCode") String postalCode,@JsonProperty("cityName") String cityName,@JsonProperty("country") String country, @JsonProperty("street") String street) {
+
+    public LocalitationDTO(Integer id, String postalCode, String cityName, String country, String street) {
         this.id = id;
         this.postalCode = postalCode;
         this.cityName = cityName;

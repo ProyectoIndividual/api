@@ -1,31 +1,18 @@
-package es.proyecto.apiproyecto.repository.modelo;
+package es.proyecto.apiproyecto.rest.dto;
 
-
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
 import java.sql.Date;
 
-@Entity
-@Table(name="evento")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Event {
+public class EventDTO {
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "localitation_id")
-    private Localitation localitation;
+    private LocalitationDTO localitation;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user = null;
+
+    private UserDTO user = null;
 
     private String details;
     private Date startTimePlanned;
@@ -36,17 +23,13 @@ public class Event {
     private float price;
     private boolean isPublic;
 
-    @Lob
-    @Column(name="image")
-    @Type(type="org.hibernate.type.BinaryType")
     private byte[] image;
 
 
-    public Event() {
+    public EventDTO() {
     }
 
-    @JsonCreator
-    public Event(@JsonProperty("id") Integer id, @JsonProperty("localitation") Localitation localitation,@JsonProperty("user")  User user,@JsonProperty("details") String details,@JsonProperty("startTimePlanned") Date startTimePlanned, @JsonProperty("endTimePlanned") Date endTimePlanned, @JsonProperty("startTimeActual") Date startTimeActual, @JsonProperty("endTimeActual") Date endTimeActual, @JsonProperty("price") float price, @JsonProperty("isPublic") boolean isPublic,@JsonProperty("image") byte[] image) {
+    public EventDTO(Integer id, LocalitationDTO localitation, UserDTO user, String details, Date startTimePlanned, Date endTimePlanned, Date startTimeActual, Date endTimeActual, float price, boolean isPublic, byte[] image) {
         this.id = id;
         this.localitation = localitation;
         this.user = user;
@@ -68,19 +51,19 @@ public class Event {
         this.id = id;
     }
 
-    public Localitation getLocalitation() {
+    public LocalitationDTO getLocalitation() {
         return localitation;
     }
 
-    public void setLocalitation(Localitation localitation) {
+    public void setLocalitation(LocalitationDTO localitation) {
         this.localitation = localitation;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
