@@ -14,7 +14,8 @@
 	<name>apiproyecto</name>
 	<description>Demo project for Spring Boot Api Proyecto </description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -46,7 +47,12 @@
 			<version>8.0.28</version>
 			<scope>runtime</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
